@@ -598,6 +598,7 @@ internal object LiveParserDictionaryLoader {
 
     private val languagePacks = listOf(
         DictionaryLanguagePack("en", "liveupdate_dictionary_en.json"),
+        DictionaryLanguagePack("pt-BR", "liveupdate_dictionary_pt-BR.json"),
         DictionaryLanguagePack("ru", "liveupdate_dictionary_ru.json"),
         DictionaryLanguagePack("zh", "liveupdate_dictionary_zh.json"),
         DictionaryLanguagePack("ko", "liveupdate_dictionary_ko.json")

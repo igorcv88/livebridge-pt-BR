@@ -20,6 +20,11 @@ const List<DictionaryLanguageOption> lbDictionaryLanguages =
         assetFileName: 'liveupdate_dictionary_en.json',
       ),
       DictionaryLanguageOption(
+        id: 'pt-BR',
+        label: 'Português (Brasil)',
+        assetFileName: 'liveupdate_dictionary_pt-BR.json',
+      ),
+      DictionaryLanguageOption(
         id: 'ru',
         label: 'Русский',
         assetFileName: 'liveupdate_dictionary_ru.json',
@@ -146,7 +151,9 @@ const Set<String> _languageSensitiveStringKeys = <String>{
 final RegExp _hangulRegExp = RegExp(r'[\uAC00-\uD7AF\u3131-\u318E]');
 final RegExp _cjkRegExp = RegExp(r'[\u3400-\u9FFF\uF900-\uFAFF]');
 final RegExp _cyrillicRegExp = RegExp(r'[\u0400-\u04FF]');
-final RegExp _latinRegExp = RegExp(r'[A-Za-z]');
+final RegExp _latinRegExp = RegExp(
+  r'[A-Za-zÀ-ÖØ-öø-ÿ\u0100-\u017F\u0300-\u036F]',
+);
 
 List<dynamic> _scopeSmartRules(List<dynamic>? raw, String languageId) {
   if (raw == null) {
@@ -286,7 +293,7 @@ bool _matchesLanguageForLocale(String localeKey, String languageId) {
 Set<String> _detectLanguages(String raw) {
   final String value = raw.trim();
   if (value.isEmpty) {
-    return const <String>{'en', 'ru', 'zh', 'ko'};
+    return const <String>{'en', 'pt-BR', 'ru', 'zh', 'ko'};
   }
 
   final Set<String> languages = <String>{};
@@ -301,9 +308,10 @@ Set<String> _detectLanguages(String raw) {
   }
   if (_latinRegExp.hasMatch(value)) {
     languages.add('en');
+    languages.add('pt-BR');
   }
 
-  return languages.isEmpty ? const <String>{'en', 'ru', 'zh', 'ko'} : languages;
+  return languages.isEmpty ? const <String>{'en', 'pt-BR', 'ru', 'zh', 'ko'} : languages;
 }
 
 dynamic _deepCopyJsonNode(dynamic node) {
